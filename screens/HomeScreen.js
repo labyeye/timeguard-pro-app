@@ -77,11 +77,14 @@ const HomeScreen = ({ navigation }) => {
     }, 1000);
   }, []);
 
-  const getPriorityLevel = (dueDate) => {
-    if (!dueDate) return 'low';
+  const getPriorityLevel = (task) => {
+    if (task.priority) return task.priority; // Use manually set priority if available
+  
+    // Otherwise, fall back to due date calculation
+    if (!task.dueDate) return 'low';
     
     const today = new Date();
-    const due = new Date(dueDate);
+    const due = new Date(task.dueDate);
     const diffTime = due - today;
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
     
@@ -90,6 +93,7 @@ const HomeScreen = ({ navigation }) => {
     if (diffDays <= 5) return 'medium';
     return 'low';
   };
+  
 
   const getPriorityColor = (priorityLevel) => {
     switch (priorityLevel) {

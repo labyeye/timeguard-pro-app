@@ -1701,6 +1701,8 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
+  - RNSiriShortcuts (3.2.4):
+    - React
   - RNVectorIcons (10.2.0):
     - DoubleConversion
     - glog
@@ -1799,6 +1801,7 @@ DEPENDENCIES:
   - "RNDateTimePicker (from `../node_modules/@react-native-community/datetimepicker`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNScreens (from `../node_modules/react-native-screens`)
+  - RNSiriShortcuts (from `../node_modules/react-native-siri-shortcut`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
@@ -1950,6 +1953,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-gesture-handler"
   RNScreens:
     :path: "../node_modules/react-native-screens"
+  RNSiriShortcuts:
+    :path: "../node_modules/react-native-siri-shortcut"
   RNVectorIcons:
     :path: "../node_modules/react-native-vector-icons"
   Yoga:
@@ -2027,6 +2032,7 @@ SPEC CHECKSUMS:
   RNDateTimePicker: e30677c15dfba25452b1434181970162115cc4fe
   RNGestureHandler: 8b1080a6db0be82dbca18550d6212b885bfab6b2
   RNScreens: b32d0d59b53acb574fa795a9343591ef4e7ab7c2
+  RNSiriShortcuts: 149966f5de0cac63bd9fd8c2d5c51235439d1760
   RNVectorIcons: bd818296a51dc2bb8c3bd97a3ca399df1afe216d
   SocketRocket: d4aabe649be1e368d1318fdf28a022d714d65748
   Yoga: b94ff2d7559cb66837c97a3f394ddb817faad4d6

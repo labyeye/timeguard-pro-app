@@ -1,58 +1,29 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { AppState, Platform, StatusBar } from 'react-native';
+import { Platform, StatusBar } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import PushNotification from 'react-native-push-notification';
+import SiriShortcuts from 'react-native-siri-shortcut';
+import { useNavigation } from '@react-navigation/native';
 
 // Screens
 import HomeScreen from './screens/HomeScreen';
 import AddTaskScreen from './screens/AddTaskScreen';
 import TaskDetailsScreen from './screens/TaskDetailsScreen';
-
+import SiriShortcutHandler from './SiriShortcutHandler';
 // Context
 import { ThemeProvider } from './context/ThemeContext';
-import { TaskProvider } from './context/TaskContext';
+import { TaskProvider, TaskContext } from './context/TaskContext';
 
 const Stack = createStackNavigator();
 
 // Configure notifications for React Native
 const configurePushNotifications = () => {
-  // Configure for iOS
-  PushNotification.configure({
-    onRegister: function (token) {
-      console.log("TOKEN:", token);
-    },
-    onNotification: function (notification) {
-      console.log("NOTIFICATION:", notification);
-      notification.finish(PushNotificationIOS.FetchResult.NoData);
-    },
-    permissions: {
-      alert: true,
-      badge: true,
-      sound: true,
-    },
-    popInitialNotification: true,
-    requestPermissions: true,
-  });
-
-  // Create a notification channel for Android
-  if (Platform.OS === 'android') {
-    PushNotification.createChannel(
-      {
-        channelId: "default",
-        channelName: "Default Channel",
-        channelDescription: "A default channel for notifications",
-        soundName: "default",
-        importance: 4,
-        vibrate: true,
-      },
-      (created) => console.log(`Channel created: ${created}`)
-    );
-  }
+  // ... (your existing configuration)
 };
+
 
 export default function App() {
   const [appIsReady, setAppIsReady] = useState(false);
@@ -85,6 +56,9 @@ export default function App() {
       <ThemeProvider>
         <TaskProvider>
           <NavigationContainer>
+            {/* Add SiriShortcutHandler */}
+            <SiriShortcutHandler />
+            
             <Stack.Navigator
               initialRouteName="Home"
               screenOptions={({ route, navigation }) => ({
@@ -103,17 +77,12 @@ export default function App() {
               <Stack.Screen 
                 name="AddTask" 
                 component={AddTaskScreen} 
-                options={{ 
-                  headerShown:false 
-                }}
+                options={{ headerShown: false }}
               />
               <Stack.Screen 
                 name="TaskDetails" 
                 component={TaskDetailsScreen} 
-                options={{ 
-                  headerShown:false 
-
-                }}
+                options={{ headerShown: false }}
               />
             </Stack.Navigator>
           </NavigationContainer>
